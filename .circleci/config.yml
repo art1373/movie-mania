@@ -15,7 +15,7 @@ jobs:
             -app-
       - run:
           name: Install yarn
-          command: sudo npm install -g yarn
+          command: sudo npm install -g yarn --force
       - run:
           name: Install dependencies
           command: yarn install
