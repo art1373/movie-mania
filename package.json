@@ -16,6 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint 'src/**/*.js*'",
     "cypress": "./node_modules/.bin/cypress open",
     "e2e": "./node_modules/.bin/cypress run"
   },
@@ -39,6 +40,8 @@
   },
   "devDependencies": {
     "cypress": "^6.1.0",
+    "eslint": "^7.16.0",
+    "eslint-config-standard": "^16.0.2",
     "netlify-cli": "^2.69.10"
   }
 }
