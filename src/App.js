@@ -1,7 +1,12 @@
-import "./App.css";
+import "./App.scss";
+import { Header } from "./components";
 
 function App() {
-  return <div className="App">Movie Mania Develop</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default App;
