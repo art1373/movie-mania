@@ -2,6 +2,9 @@ version: 2.1
 
 jobs:
   build:
+    branches:
+    only:
+      - staging
     docker:
       - image: circleci/node:12.18.4
     working_directory: ~/repo
