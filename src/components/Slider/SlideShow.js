@@ -20,6 +20,7 @@ const SlideShow = (props) => {
       clearInterval(timeInterval);
       clearInterval(sliderInterval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function moveSlideArrows(type) {
