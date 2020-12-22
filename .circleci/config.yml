@@ -2,9 +2,6 @@ version: 2.1
 
 jobs:
   build:
-    branches:
-    only:
-      - staging
     docker:
       - image: circleci/node:12.18.4
     working_directory: ~/repo
@@ -23,3 +20,12 @@ jobs:
           paths:
             - node_modules
           key: app-{{ checksum "package.json" }}
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: staging 
