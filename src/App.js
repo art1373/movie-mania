@@ -1,10 +1,11 @@
 import "./App.scss";
-import { Header } from "./components";
+import { Header, Main } from "./components";
 
 function App() {
   return (
     <>
       <Header />
+      <Main />
     </>
   );
 }
