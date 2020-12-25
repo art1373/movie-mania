@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SlideShow, Paginate } from "../index";
+import { SlideShow, Paginate, Grid } from "../index";
 import "./MainContent.scss";
 
 function MainContent() {
@@ -13,6 +13,11 @@ function MainContent() {
       url:
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
     },
+    {
+      url:
+        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
+    },
+    { url: "https://www.w3schools.com/css/img_5terre.jpg" },
   ];
   const [currentPage, setcurrentPage] = useState(1);
   const paginate = (type) => {
@@ -35,6 +40,7 @@ function MainContent() {
           />
         </div>
       </div>
+      <Grid images={imags} />
     </div>
   );
 }
