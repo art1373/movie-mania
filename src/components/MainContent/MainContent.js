@@ -5,19 +5,22 @@ import "./MainContent.scss";
 function MainContent() {
   const imags = [
     {
+      rating: 5.5,
       url:
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
     },
-    { url: "https://www.w3schools.com/css/img_5terre.jpg" },
+    { rating: 6, url: "https://www.w3schools.com/css/img_5terre.jpg" },
     {
+      rating: 10,
       url:
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
     },
     {
+      rating: 7.5,
       url:
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
     },
-    { url: "https://www.w3schools.com/css/img_5terre.jpg" },
+    { rating: 8.2, url: "https://www.w3schools.com/css/img_5terre.jpg" },
   ];
   const [currentPage, setcurrentPage] = useState(1);
   const paginate = (type) => {

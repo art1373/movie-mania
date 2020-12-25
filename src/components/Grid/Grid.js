@@ -1,4 +1,5 @@
 import React from "react";
+import { Rating } from "../../components";
 import "./Grid.scss";
 
 const Grid = ({ images }) => {
@@ -17,13 +18,9 @@ const Grid = ({ images }) => {
               <div className="grid-detail">
                 <span className="grid-detail-title">Mission Impossible</span>
                 <div className="grid-detail-rating">
-                  <i className="fa fa-star" aria-hidden="true" />
-                  <i className="fa fa-star" aria-hidden="true" />
-                  <i className="fa fa-star" aria-hidden="true" />
-                  <i className="fa fa-star" aria-hidden="true" />
-                  <i className="fa fa-star" aria-hidden="true" />
+                  <Rating rating={img.rating} totalStars={10} />
                   &nbsp;&nbsp;
-                  <div className="grid-vote-average">4.5</div>
+                  <div className="grid-vote-average">{img.rating}</div>
                 </div>
               </div>
             </div>
