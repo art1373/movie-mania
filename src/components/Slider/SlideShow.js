@@ -11,7 +11,13 @@ const SlideShow = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderInterval, setSliderInterval] = useState(0);
   let currentSlideIndex = 0;
+
   useEffect(() => {
+    setState({
+      ...state,
+      slideIndex: 0,
+      slideShow: images[0],
+    });
     const timeInterval = setInterval(() => {
       autoSliding();
     }, 5000);
@@ -21,7 +27,7 @@ const SlideShow = (props) => {
       clearInterval(sliderInterval);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [images]);
 
   function moveSlideArrows(type) {
     let index = currentIndex;

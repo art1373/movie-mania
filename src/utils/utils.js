@@ -9,3 +9,7 @@ export function ratingCalc(rating) {
   const starPercentage = `${Math.floor(percentage)}%`;
   return starPercentage;
 }
+
+export const Randmoize = (list) => {
+  return list.sort(() => Math.random() - Math.random()).slice(0, 5);
+};

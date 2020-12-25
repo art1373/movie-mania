@@ -1,11 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import cinemaLogo from "../../assets/cinema.svg";
+import PropTypes from "prop-types";
+import { getMovies } from "../../redux/actions/movieActions";
+import { useDispatch } from "react-redux";
 import { HEADER_LIST } from "../../utils/constants";
 import "./Header.scss";
 
 const Header = () => {
   let [navClass, setnNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getMovies("now_playing", 1));
+  }, []);
 
   const toggleMenu = () => {
     setnNavClass(!navClass);
@@ -60,6 +68,10 @@ const Header = () => {
       </div>
     </>
   );
+};
+
+Header.propTypes = {
+  getMovies: PropTypes.func,
 };
 
 export default Header;
