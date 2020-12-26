@@ -9,3 +9,10 @@ export const HEADER_LIST = [
     type: "upcoming",
   },
 ];
+
+export const HEADER_TYPE = {
+  now_playing: "Now Playing",
+  upcoming: "Upcoming",
+  popular: "Popular",
+  top_rated: "Top Rated",
+};

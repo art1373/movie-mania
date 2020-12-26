@@ -1,5 +1,5 @@
 import React from "react";
-import { Rating } from "../../components";
+import { Rating, LazyImage } from "../../components";
 import "./Grid.scss";
 import { useSelector } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
@@ -17,11 +17,10 @@ const Grid = ({ images }) => {
       <div className="grid">
         {moviedata.map((data) => (
           <div key={uuidV4()}>
-            <div
+            <LazyImage
               className="grid-cell"
-              style={{
-                backgroundImage: `url(${IMAGE_URL}${data?.poster_path})`,
-              }}
+              src={`${IMAGE_URL}${data?.poster_path}`}
+              alt={"placeholder"}
             >
               <div className="grid-read-more">
                 <button className="grid-cell-button">Read More</button>
@@ -34,7 +33,7 @@ const Grid = ({ images }) => {
                   <div className="grid-vote-average">{data?.vote_average}</div>
                 </div>
               </div>
-            </div>
+            </LazyImage>
           </div>
         ))}
       </div>

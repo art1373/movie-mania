@@ -2,18 +2,32 @@
 import React, { useState } from "react";
 import cinemaLogo from "../../assets/cinema.svg";
 import PropTypes from "prop-types";
-import { getMovies } from "../../redux/actions/movieActions";
-import { useDispatch } from "react-redux";
+import {
+  getMovies,
+  setMovieType,
+  setResponsePageNumber,
+} from "../../redux/actions/movieActions";
+import { useDispatch, useSelector } from "react-redux";
 import { HEADER_LIST } from "../../utils/constants";
 import "./Header.scss";
 
 const Header = () => {
   let [navClass, setnNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+  let [type, setType] = useState("now_playing");
   const dispatch = useDispatch();
+  const page = useSelector((state) => state.movies.page);
+  const totalPages = useSelector((state) => state.movies.totalPages);
+
   React.useEffect(() => {
-    dispatch(getMovies("now_playing", 1));
-  }, []);
+    dispatch(getMovies(type, page));
+    dispatch(setResponsePageNumber(page, totalPages));
+  }, [type]);
+
+  const setMovieTypeUrl = (type) => {
+    setType(type);
+    dispatch(setMovieType(type));
+  };
 
   const toggleMenu = () => {
     setnNavClass(!navClass);
@@ -50,7 +64,15 @@ const Header = () => {
             }`}
           >
             {HEADER_LIST.map((h) => (
-              <li key={h.id} className="header-nav-item">
+              <li
+                key={h.id}
+                className={
+                  h.type === type
+                    ? "header-nav-item active-item"
+                    : "header-nav-item"
+                }
+                onClick={() => setMovieTypeUrl(h.type)}
+              >
                 <span className="header-list-name">
                   <i className={h.iconClass} />
                 </span>
@@ -72,6 +94,10 @@ const Header = () => {
 
 Header.propTypes = {
   getMovies: PropTypes.func,
+  setResponsePageNumber: PropTypes.func,
+  setMovieType: PropTypes.func,
+  page: PropTypes.number,
+  totalPages: PropTypes.number,
 };
 
 export default Header;

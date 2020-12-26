@@ -48,11 +48,12 @@
   }
 
   .active-item {
-    color: #3498db;
+    color: #ff6ec7;
   }
 }
 
 .header-nav-item .header-list-name {
+  cursor: pointer;
   font-size: 0.9rem;
   font-weight: 400;
   text-decoration: none;
