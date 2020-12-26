@@ -1,6 +1,8 @@
 import {
   LOAD_MORE_RESULTS,
   MOVIE_LIST_SUCCESS,
+  SEARCH_QUERY,
+  SEARCH_RESULT,
   SET_MOVIE_TYPE,
   SET_PAGES,
 } from "../types";
@@ -10,6 +12,8 @@ const initialState = {
   page: 1,
   totalPages: 0,
   movieType: "now_playing",
+  searchQuery: "",
+  searchResult: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +36,10 @@ const reducer = (state = initialState, action) => {
 
     case SET_MOVIE_TYPE:
       return { ...state, movieType: action.payload };
+    case SEARCH_QUERY:
+      return { ...state, searchQuery: action.payload };
+    case SEARCH_RESULT:
+      return { ...state, searchResult: action.payload };
     default:
       return state;
   }

@@ -6,6 +6,8 @@ import {
   getMovies,
   setMovieType,
   setResponsePageNumber,
+  setSearchQuery,
+  searchMovieResult,
 } from "../../redux/actions/movieActions";
 import { useDispatch, useSelector } from "react-redux";
 import { HEADER_LIST } from "../../utils/constants";
@@ -14,6 +16,7 @@ import "./Header.scss";
 const Header = () => {
   let [navClass, setnNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+  const [search, setsearch] = useState("");
   let [type, setType] = useState("now_playing");
   const dispatch = useDispatch();
   const page = useSelector((state) => state.movies.page);
@@ -38,6 +41,12 @@ const Header = () => {
       document.body.classList.remove("header-nav-open");
     }
   };
+
+  function handleChange(value) {
+    setsearch(value);
+    dispatch(setSearchQuery(value));
+    dispatch(searchMovieResult(value));
+  }
 
   return (
     <>
@@ -81,9 +90,11 @@ const Header = () => {
               </li>
             ))}
             <input
+              value={search}
               className="search-input"
               type="text"
               placeholder="Search for Movies"
+              onChange={(e) => handleChange(e.target.value)}
             />
           </ul>
         </div>

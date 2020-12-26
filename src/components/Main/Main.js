@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import "./Main.scss";
-import MainContent from "../MainContent/MainContent";
 import PropTypes from "prop-types";
-import { Spinner } from "../../components";
+import { Spinner, SearchResults, MainContent } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
 import {
   loadMoreMovies,
@@ -15,6 +14,7 @@ function Main() {
   const page = useSelector((state) => state.movies.page);
   const movieType = useSelector((state) => state.movies.movieType);
   const totalPages = useSelector((state) => state.movies.totalPages);
+  const searchQueryResult = useSelector((state) => state.movies.searchResult);
   const [loading, setloading] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(page);
   const mainRef = React.useRef();
@@ -53,7 +53,17 @@ function Main() {
 
   return (
     <div ref={mainRef} className="main" onScroll={() => handleScroll()}>
-      {loading ? <Spinner /> : <MainContent />}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          {searchQueryResult && searchQueryResult.length === 0 ? (
+            <MainContent />
+          ) : (
+            <SearchResults />
+          )}
+        </>
+      )}
       <div ref={bottomLineRef}></div>
     </div>
   );
@@ -65,6 +75,7 @@ Main.propTypes = {
   totalPages: PropTypes.number,
   loadMoreMovies: PropTypes.func,
   setResponsePageNumber: PropTypes.func,
+  searchQueryResult: PropTypes.array,
 };
 
 export default Main;

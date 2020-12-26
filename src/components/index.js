@@ -1,8 +1,10 @@
 export { default as Header } from "./Header/Header";
 export { default as Main } from "./Main/Main";
+export { default as MainContent } from "./MainContent/MainContent";
 export { default as SlideShow } from "./Slider/SlideShow";
 export { default as Paginate } from "./Paginate/Paginate";
 export { default as Grid } from "./Grid/Grid";
 export { default as Rating } from "./Rating/Rating";
 export { default as Spinner } from "./Spinner/Spinner";
 export { default as LazyImage } from "./Lazy/LazyImage";
+export { default as SearchResults } from "./Search/SearchResults";

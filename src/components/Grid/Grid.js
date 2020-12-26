@@ -16,7 +16,7 @@ const Grid = ({ images }) => {
     <>
       <div className="grid">
         {moviedata.map((data) => (
-          <div key={uuidV4()}>
+          <div key={uuidV4()} className={data?.poster_path ? "" : "hide-me"}>
             <LazyImage
               className="grid-cell"
               src={`${IMAGE_URL}${data?.poster_path}`}

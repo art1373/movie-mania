@@ -14,3 +14,14 @@ export const requestMaker = async (type, page) => {
     console.log(error);
   }
 };
+
+export const movieQueryApi = async (query) => {
+  try {
+    const response = await Axios.get(
+      `${MAIN_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
