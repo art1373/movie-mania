@@ -70,7 +70,7 @@ function MainContent() {
 MainContent.propTypes = {
   list: PropTypes.array,
   totalPages: PropTypes.number,
-  movieType: PropTypes.string.isRequired,
+  movieType: PropTypes.string,
   setResponsePageNumber: PropTypes.func,
   getMovies: PropTypes.func,
 };
