@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Rating, Tabs, Media, Overview, Crew, Reviews } from "../../components";
 import "./Details.scss";
 
-function Details() {
+function Details({ date = "2021-02-10" }) {
   return (
     <div className="movie-container">
       <div
@@ -23,7 +23,7 @@ function Details() {
         <div className="movie-body">
           <div className="movie-overview">
             <div className="title">
-              <span>2021-02-10</span>
+              <span></span>
             </div>
             <div className="movie-genres">
               <ul className="genres">
@@ -57,5 +57,7 @@ function Details() {
     </div>
   );
 }
-Details.propTypes = {};
+Details.propTypes = {
+  date: PropTypes.string,
+};
 export default Details;
