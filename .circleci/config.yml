@@ -16,6 +16,10 @@ jobs:
       - run:
           name: Install dependencies
           command: yarn install
+       - run:
+          name: deploy to Netlify
+          command: curl -X POST -d {} ${hook}
+
       - save_cache:
           paths:
             - node_modules
@@ -28,4 +32,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: staging 
+              only: master
