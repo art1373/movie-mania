@@ -6,8 +6,18 @@ import {
   SET_ERROR,
   SET_MOVIE_TYPE,
   SET_PAGES,
+  CLEAR_MOVIE_DETAIL,
+  MOVIE_DETAILS,
 } from "../types";
-import { requestMaker, movieQueryApi } from "./../../services/movieService";
+import {
+  requestMaker,
+  movieQueryApi,
+  movieCreditGetter,
+  movieDetailGetter,
+  movieImageGetter,
+  movieVideosGetter,
+  moviewReviewsGetter,
+} from "./../../services/movieService";
 
 const dispatchMethod = (type, payload, dispatch) => {
   dispatch({ type, payload });
@@ -51,20 +61,6 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
   }
 };
 
-// for setting store states manually
-export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
-  const payload = { page, totalPages };
-  dispatchMethod(SET_PAGES, payload, dispatch);
-};
-
-export const setMovieType = (type) => async (dispatch) => {
-  dispatchMethod(SET_MOVIE_TYPE, type, dispatch);
-};
-
-export const setSearchQuery = (query) => async (dispatch) => {
-  dispatchMethod(SEARCH_QUERY, query, dispatch);
-};
-
 export const searchMovieResult = (query) => async (dispatch) => {
   try {
     if (query) {
@@ -80,4 +76,42 @@ export const searchMovieResult = (query) => async (dispatch) => {
       dispatchMethod(SET_ERROR, errorMsg);
     }
   }
+};
+
+export const setMovieDetail = (id) => async (dispatch) => {
+  try {
+    const details = await movieDetailGetter(id);
+    const credits = await movieCreditGetter(id);
+    const images = await movieImageGetter(id);
+    const videos = await movieVideosGetter(id);
+    const reviews = await moviewReviewsGetter(id);
+    const resp = await Promise.all([details, credits, images, videos, reviews])
+      .then((values) => Promise.all(values.map((value) => value.data)))
+      .then((response) => {
+        return response;
+      });
+    dispatchMethod(MOVIE_DETAILS, resp, dispatch);
+  } catch (error) {
+    if (error.response) {
+      const errorMsg = error?.response?.data?.message;
+      dispatchMethod(SET_ERROR, errorMsg);
+    }
+  }
+};
+// for setting store states manually
+export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
+  const payload = { page, totalPages };
+  dispatchMethod(SET_PAGES, payload, dispatch);
+};
+
+export const setMovieType = (type) => async (dispatch) => {
+  dispatchMethod(SET_MOVIE_TYPE, type, dispatch);
+};
+
+export const setSearchQuery = (query) => async (dispatch) => {
+  dispatchMethod(SEARCH_QUERY, query, dispatch);
+};
+
+export const clearMovieDetail = () => async (dispatch) => {
+  dispatchMethod(CLEAR_MOVIE_DETAIL, [], dispatch);
 };

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { Spinner, SearchResults, MainContent } from "../../../components";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  clearMovieDetail,
   loadMoreMovies,
   setResponsePageNumber,
 } from "../../../redux/actions/movieActions";
@@ -22,6 +23,7 @@ function Main() {
 
   React.useEffect(() => {
     setloading(true);
+    dispatch(clearMovieDetail());
     setTimeout(() => {
       setloading(false);
     }, 3000);

@@ -35,7 +35,7 @@ const SearchResults = () => {
                 <div className="grid-read-more">
                   <button className="grid-cell-button">
                     <Link
-                      to={`/${formatMovieTitle(data.title)}/${data.id}/details`}
+                      to={`/${data.id}/${formatMovieTitle(data.title)}/details`}
                     >
                       Read More
                     </Link>

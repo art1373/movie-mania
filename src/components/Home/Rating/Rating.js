@@ -37,7 +37,7 @@ const Rating = ({ rating, totalStars, className }) => {
 };
 
 Rating.propTypes = {
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number,
   totalStars: PropTypes.number.isRequired,
   className: PropTypes.string,
 };

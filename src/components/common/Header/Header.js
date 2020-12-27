@@ -8,8 +8,9 @@ import {
   setResponsePageNumber,
   setSearchQuery,
   searchMovieResult,
+  clearMovieDetail,
 } from "../../../redux/actions/movieActions";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { HEADER_LIST } from "../../../utils/constants";
 import "./Header.scss";
@@ -17,21 +18,34 @@ import "./Header.scss";
 const Header = () => {
   let [navClass, setnNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
+  let [disableSearch, setDisableSearch] = useState(false);
   const [search, setsearch] = useState("");
   let [type, setType] = useState("now_playing");
   const dispatch = useDispatch();
   const page = useSelector((state) => state.movies.page);
   const totalPages = useSelector((state) => state.movies.totalPages);
   const history = useHistory();
+  const location = useLocation();
 
   React.useEffect(() => {
     dispatch(getMovies(type, page));
     dispatch(setResponsePageNumber(page, totalPages));
-  }, [type]);
+    if (location.pathname !== "/" && location.key) {
+      setDisableSearch(true);
+    }
+  }, [type, disableSearch, location]);
 
   const setMovieTypeUrl = (type) => {
-    setType(type);
-    dispatch(setMovieType(type));
+    setDisableSearch(false);
+    if (location.pathname !== "/") {
+      dispatch(clearMovieDetail());
+      history.push("/");
+      setType(type);
+      setMovieType(type);
+    } else {
+      setType(type);
+      setMovieType(type);
+    }
   };
 
   const toggleMenu = () => {
@@ -49,13 +63,18 @@ const Header = () => {
     dispatch(setSearchQuery(value));
     dispatch(searchMovieResult(value));
   }
+  function navigateBack() {
+    history.push("/");
+    dispatch(clearMovieDetail());
+    setDisableSearch(false);
+  }
 
   return (
     <>
       <div className="header-nav-wrapper">
         <div className="header-bar"></div>
         <div className="header-navbar">
-          <div className="header-image" onClick={() => history.push("/")}>
+          <div className="header-image" onClick={navigateBack}>
             <img className="logo" src={cinemaLogo} alt="movie-mania-logo" />
           </div>
           <div
@@ -93,7 +112,7 @@ const Header = () => {
             ))}
             <input
               value={search}
-              className="search-input"
+              className={`search-input ${disableSearch ? "disabled" : ""}`}
               type="text"
               placeholder="Search for Movies"
               onChange={(e) => handleChange(e.target.value)}
@@ -109,6 +128,7 @@ Header.propTypes = {
   getMovies: PropTypes.func,
   setResponsePageNumber: PropTypes.func,
   setMovieType: PropTypes.func,
+  clearMovieDetail: PropTypes.func,
   page: PropTypes.number,
   totalPages: PropTypes.number,
 };

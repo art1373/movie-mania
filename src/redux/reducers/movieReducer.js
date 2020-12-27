@@ -1,5 +1,7 @@
 import {
   LOAD_MORE_RESULTS,
+  MOVIE_DETAILS,
+  CLEAR_MOVIE_DETAIL,
   MOVIE_LIST_SUCCESS,
   SEARCH_QUERY,
   SEARCH_RESULT,
@@ -14,6 +16,7 @@ const initialState = {
   movieType: "now_playing",
   searchQuery: "",
   searchResult: [],
+  movie: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +43,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, searchQuery: action.payload };
     case SEARCH_RESULT:
       return { ...state, searchResult: action.payload };
+    case MOVIE_DETAILS:
+      return { ...state, movie: [...action.payload] };
+    case CLEAR_MOVIE_DETAIL:
+      return { ...state, movie: action.payload };
     default:
       return state;
   }
