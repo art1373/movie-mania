@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Install dependencies
           command: yarn install
-       - run:
+      - run:
           name: deploy to Netlify
           command: curl -X POST -d {} ${hook}
 
