@@ -10,7 +10,7 @@ import {
   searchMovieResult,
   clearMovieDetail,
 } from "../../../redux/actions/movieActions";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { HEADER_LIST } from "../../../utils/constants";
 import "./Header.scss";
@@ -19,6 +19,7 @@ const Header = () => {
   let [navClass, setnNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
   let [disableSearch, setDisableSearch] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
   const [search, setsearch] = useState("");
   let [type, setType] = useState("now_playing");
   const dispatch = useDispatch();
@@ -26,12 +27,14 @@ const Header = () => {
   const totalPages = useSelector((state) => state.movies.totalPages);
   const history = useHistory();
   const location = useLocation();
+  const detailsRoute = useRouteMatch("/:id/:name/details");
 
   React.useEffect(() => {
     dispatch(getMovies(type, page));
     dispatch(setResponsePageNumber(page, totalPages));
-    if (location.pathname !== "/" && location.key) {
-      setDisableSearch(true);
+
+    if (detailsRoute || location.pathname === "/") {
+      setHideHeader(true);
     }
   }, [type, disableSearch, location]);
 
@@ -64,62 +67,66 @@ const Header = () => {
     dispatch(searchMovieResult(value));
   }
   function navigateBack() {
-    history.push("/");
-    dispatch(clearMovieDetail());
     setDisableSearch(false);
+    dispatch(clearMovieDetail());
+    history.push("/");
   }
 
   return (
     <>
-      <div className="header-nav-wrapper">
-        <div className="header-bar"></div>
-        <div className="header-navbar">
-          <div className="header-image" onClick={navigateBack}>
-            <img className="logo" src={cinemaLogo} alt="movie-mania-logo" />
+      {hideHeader && (
+        <div className="header-nav-wrapper">
+          <div className="header-bar"></div>
+          <div className="header-navbar">
+            <div className="header-image" onClick={navigateBack}>
+              <img className="logo" src={cinemaLogo} alt="movie-mania-logo" />
+            </div>
+            <div
+              className={`${
+                menuClass
+                  ? "header-menu-toggle is-active"
+                  : "header-menu-toggle"
+              }`}
+              id="header-mobile-menu"
+              onClick={toggleMenu}
+            >
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </div>
+            <ul
+              className={`${
+                navClass ? "header-nav header-mobile-nav" : "header-nav"
+              }`}
+            >
+              {HEADER_LIST.map((h) => (
+                <li
+                  key={h.id}
+                  className={
+                    h.type === type
+                      ? "header-nav-item active-item"
+                      : "header-nav-item"
+                  }
+                  onClick={() => setMovieTypeUrl(h.type)}
+                >
+                  <span className="header-list-name">
+                    <i className={h.iconClass} />
+                  </span>
+                  &nbsp;
+                  <span className="header-list-name">{h.name}</span>
+                </li>
+              ))}
+              <input
+                value={search}
+                className={`search-input ${disableSearch ? "disabled" : ""}`}
+                type="text"
+                placeholder="Search for Movies"
+                onChange={(e) => handleChange(e.target.value)}
+              />
+            </ul>
           </div>
-          <div
-            className={`${
-              menuClass ? "header-menu-toggle is-active" : "header-menu-toggle"
-            }`}
-            id="header-mobile-menu"
-            onClick={toggleMenu}
-          >
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </div>
-          <ul
-            className={`${
-              navClass ? "header-nav header-mobile-nav" : "header-nav"
-            }`}
-          >
-            {HEADER_LIST.map((h) => (
-              <li
-                key={h.id}
-                className={
-                  h.type === type
-                    ? "header-nav-item active-item"
-                    : "header-nav-item"
-                }
-                onClick={() => setMovieTypeUrl(h.type)}
-              >
-                <span className="header-list-name">
-                  <i className={h.iconClass} />
-                </span>
-                &nbsp;
-                <span className="header-list-name">{h.name}</span>
-              </li>
-            ))}
-            <input
-              value={search}
-              className={`search-input ${disableSearch ? "disabled" : ""}`}
-              type="text"
-              placeholder="Search for Movies"
-              onChange={(e) => handleChange(e.target.value)}
-            />
-          </ul>
         </div>
-      </div>
+      )}
     </>
   );
 };

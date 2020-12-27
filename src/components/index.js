@@ -17,3 +17,6 @@ export { default as Overview } from "./Details/Overview/Overview";
 export { default as Crew } from "./Details/Crew/Crew";
 export { default as Reviews } from "./Details/Reviews/Reviews";
 export { default as Media } from "./Details/Media/Media";
+
+// common
+export { default as NotFound } from "./common/Error/NotFound";
