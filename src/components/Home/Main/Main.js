@@ -2,12 +2,12 @@
 import React from "react";
 import "./Main.scss";
 import PropTypes from "prop-types";
-import { Spinner, SearchResults, MainContent } from "../../components";
+import { Spinner, SearchResults, MainContent } from "../../../components";
 import { useSelector, useDispatch } from "react-redux";
 import {
   loadMoreMovies,
   setResponsePageNumber,
-} from "../../redux/actions/movieActions";
+} from "../../../redux/actions/movieActions";
 
 function Main() {
   const dispatch = useDispatch();

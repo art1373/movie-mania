@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { IMAGE_URL } from "../../services/movieService";
-import { Randmoize } from "../../utils/utils";
-import { SlideShow, Paginate, Grid } from "../index";
+import { IMAGE_URL } from "../../../services/movieService";
+import { Randmoize } from "../../../utils/utils";
+import { SlideShow, Paginate, Grid } from "../../index";
 import "./MainContent.scss";
 import PropTypes from "prop-types";
-import { HEADER_TYPE } from "../../utils/constants";
+import { HEADER_TYPE } from "../../../utils/constants";
 import {
   getMovies,
   setResponsePageNumber,
-} from "../../redux/actions/movieActions";
+} from "../../../redux/actions/movieActions";
 
 function MainContent() {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
-import cinemaLogo from "../../assets/cinema.svg";
+import cinemaLogo from "../../../assets/cinema.svg";
 import PropTypes from "prop-types";
 import {
   getMovies,
@@ -8,9 +8,10 @@ import {
   setResponsePageNumber,
   setSearchQuery,
   searchMovieResult,
-} from "../../redux/actions/movieActions";
+} from "../../../redux/actions/movieActions";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { HEADER_LIST } from "../../utils/constants";
+import { HEADER_LIST } from "../../../utils/constants";
 import "./Header.scss";
 
 const Header = () => {
@@ -21,6 +22,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.movies.page);
   const totalPages = useSelector((state) => state.movies.totalPages);
+  const history = useHistory();
 
   React.useEffect(() => {
     dispatch(getMovies(type, page));
@@ -53,7 +55,7 @@ const Header = () => {
       <div className="header-nav-wrapper">
         <div className="header-bar"></div>
         <div className="header-navbar">
-          <div className="header-image">
+          <div className="header-image" onClick={() => history.push("/")}>
             <img className="logo" src={cinemaLogo} alt="movie-mania-logo" />
           </div>
           <div

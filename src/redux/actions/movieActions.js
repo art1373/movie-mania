@@ -7,7 +7,7 @@ import {
   SET_MOVIE_TYPE,
   SET_PAGES,
 } from "../types";
-import { requestMaker, movieQueryApi } from "../../services/movieService";
+import { requestMaker, movieQueryApi } from "./../../services/movieService";
 
 const dispatchMethod = (type, payload, dispatch) => {
   dispatch({ type, payload });

@@ -1,11 +1,11 @@
 import React from "react";
-import { Rating, LazyImage } from "../../components";
+import { Rating, LazyImage } from "../../../components";
 import "./Grid.scss";
 import { useSelector } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { IMAGE_URL } from "../../services/movieService";
+import { IMAGE_URL } from ".././../../services/movieService";
 
-const Grid = ({ images }) => {
+const Grid = () => {
   const list = useSelector((state) => state.movies.list);
   const [moviedata, setMovieData] = React.useState([]);
 

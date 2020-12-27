@@ -1,5 +1,5 @@
 import React from "react";
-import { ratingCalc } from "../../utils/utils";
+import { ratingCalc } from "../../../utils/utils";
 import "./Rating.scss";
 import PropTypes from "prop-types";
 

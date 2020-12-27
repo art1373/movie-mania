@@ -1,10 +1,10 @@
 import React from "react";
-import { Rating, LazyImage } from "../../components";
-import "../Grid/Grid.scss";
+import { Rating, LazyImage } from "../../../components";
+import "../../Home/Grid/Grid.scss";
 import "./Search.scss";
 import { useSelector } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
-import { IMAGE_URL } from "../../services/movieService";
+import { IMAGE_URL } from ".././../../services/movieService";
 import PropTypes from "prop-types";
 
 const SearchResults = () => {

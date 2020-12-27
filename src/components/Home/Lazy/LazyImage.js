@@ -1,5 +1,5 @@
 import React from "react";
-import placeholder from "../../assets/spinkit.gif";
+import placeholder from "../../../assets/spinkit.gif";
 import PropTypes from "prop-types";
 
 const LazyImage = ({ src, className, alt, children }) => {
