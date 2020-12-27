@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { v4 as uuidV4 } from "uuid";
 import { IMAGE_URL } from ".././../../services/movieService";
 import PropTypes from "prop-types";
+import { formatMovieTitle } from "../../../utils/utils";
+import { Link } from "react-router-dom";
 
 const SearchResults = () => {
   const searchResults = useSelector((state) => state.movies.searchResult);
@@ -31,7 +33,13 @@ const SearchResults = () => {
                 alt={"placeholder"}
               >
                 <div className="grid-read-more">
-                  <button className="grid-cell-button">Read More</button>
+                  <button className="grid-cell-button">
+                    <Link
+                      to={`/${formatMovieTitle(data.title)}/${data.id}/details`}
+                    >
+                      Read More
+                    </Link>
+                  </button>
                 </div>
                 <div className="grid-detail">
                   <span className="grid-detail-title">{data?.title}</span>

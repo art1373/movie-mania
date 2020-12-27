@@ -2,8 +2,7 @@
   position: relative;
 }
 
-.movie-bg,
-.movie-overlay {
+.movie-bg, .movie-overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -59,67 +58,68 @@
   grid-area: movieBody;
 
   .movie-overview {
-    height: auto;
+      height: auto;
 
-    .title {
-      margin-top: -10px;
-      font-size: 36px;
-      font-weight: 700;
-      color: #ffffff;
-      text-align: left;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-
-      span {
-        font-size: 24px;
-        font-weight: 300;
-        color: #4f5b68;
-      }
-    }
-
-    .movie-genres {
-      .genres {
-        height: 49px;
-        line-height: 49px;
-        display: flex;
+      .title {
+        margin-top: -10px;
+        font-size: 36px;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: left;
+        text-transform: uppercase;
         margin-bottom: 25px;
 
-        li {
-          list-style: none;
-          font-size: 14px;
-          font-weight: 700;
-          text-transform: uppercase;
-          color: #dd003f;
-          padding-right: 35px;
-          margin-left: -20px;
+        span {
+          font-size: 24px;
+          font-weight: 300;
+          color: #4f5b68;
         }
       }
-    }
 
-    .rating {
-      height: 49px;
-      line-height: 49px;
-      display: flex;
-      font-size: 25px;
-      margin-bottom: 90px;
+      .movie-genres {
+        .genres {
+            height: 49px;
+            line-height: 49px;
+            display: flex;
+            margin-bottom: 25px;
 
-      .fas {
-        color: #f5b50a;
-        padding-left: 4px;
+            li {
+              list-style: none;
+              font-size: 14px;
+              font-weight: 700;
+              text-transform: uppercase;
+              color: #dd003f;
+              padding-right: 35px;
+              margin-left: -20px;
+            }
+        }
       }
 
-      span {
-        color: #9aa9bb;
-        margin-top: -10px;
-      }
+      .rating {
+          height: 49px;
+          line-height: 49px;
+          display: flex;
+          font-size: 25px;
+          margin-bottom: 90px;
 
-      p {
-        color: #dd003f;
-        margin-left: 10px;
-        font-size: 18px;
+          .fas {
+            color: #f5b50a;
+            padding-left: 4px;
+          }
+
+          span {
+            color: #9aa9bb;
+            margin-top: -10px;
+          }
+
+          p {
+            color: #dd003f;
+            margin-left: 10px;
+            font-size: 18px;
+          }
       }
-    }
   }
+
 }
 
 @media (max-width: 1100px) {
@@ -207,7 +207,7 @@
   }
 
   .movie-image {
-    margin: 0 auto;
+      margin: 0 auto;
   }
 }
 
@@ -225,14 +225,14 @@
     }
 
     .rating {
-      width: 90%;
-      .rating-stars {
-        font-size: 18px !important;
-      }
+        width: 90%;
+        .rating-stars {
+          font-size: 18px !important;
+        }
 
-      span {
-        font-size: 80%;
-      }
+        span {
+          font-size: 80%;
+        }
     }
   }
 
