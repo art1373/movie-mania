@@ -20,3 +20,4 @@ export { default as Media } from "./Details/Media/Media";
 
 // common
 export { default as NotFound } from "./common/Error/NotFound";
+export { default as ErrorBoundry } from "./common/Error/ErrorBoundry";

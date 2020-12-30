@@ -23,6 +23,7 @@ const Header = () => {
   const [search, setsearch] = useState("");
   let [type, setType] = useState("now_playing");
   const dispatch = useDispatch();
+  const errors = useSelector((state) => state.errors);
   const page = useSelector((state) => state.movies.page);
   const totalPages = useSelector((state) => state.movies.totalPages);
   const history = useHistory();
@@ -38,16 +39,20 @@ const Header = () => {
     }
   }, [type, disableSearch, location]);
 
+  React.useEffect(() => {
+    console.log({ errors });
+  }, [errors]);
+
   const setMovieTypeUrl = (type) => {
     setDisableSearch(false);
     if (location.pathname !== "/") {
       dispatch(clearMovieDetail());
       history.push("/");
       setType(type);
-      setMovieType(type);
+      dispatch(setMovieType(type));
     } else {
       setType(type);
-      setMovieType(type);
+      dispatch(setMovieType(type));
     }
   };
 

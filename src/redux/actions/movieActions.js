@@ -37,9 +37,13 @@ export const getMovies = (type, pageNumber) => async (dispatch) => {
     dispatchMethod(MOVIE_LIST_SUCCESS, results, dispatch);
     dispatchMethod(SET_PAGES, payload, dispatch);
   } catch (error) {
-    if (error.response) {
-      const errorMsg = error?.response?.data?.message;
-      dispatchMethod(SET_ERROR, errorMsg);
+    if (error) {
+      const payload = {
+        message: error?.message,
+        status: error?.response?.status,
+      };
+
+      dispatchMethod(SET_ERROR, payload);
     }
   }
 };
@@ -55,8 +59,14 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
     );
   } catch (error) {
     if (error.response) {
-      const errorMsg = error?.response?.data?.message;
-      dispatchMethod(SET_ERROR, errorMsg);
+      const payload = {
+        message:
+          error?.response?.data?.message ||
+          error?.response?.data?.status_message,
+        status: error?.response?.status,
+      };
+
+      dispatchMethod(SET_ERROR, payload);
     }
   }
 };
@@ -72,8 +82,14 @@ export const searchMovieResult = (query) => async (dispatch) => {
     }
   } catch (error) {
     if (error.response) {
-      const errorMsg = error?.response?.data?.message;
-      dispatchMethod(SET_ERROR, errorMsg);
+      const payload = {
+        message:
+          error?.response?.data?.message ||
+          error?.response?.data?.status_message,
+        status: error?.response?.status,
+      };
+
+      dispatchMethod(SET_ERROR, payload);
     }
   }
 };
@@ -93,8 +109,14 @@ export const setMovieDetail = (id) => async (dispatch) => {
     dispatchMethod(MOVIE_DETAILS, resp, dispatch);
   } catch (error) {
     if (error.response) {
-      const errorMsg = error?.response?.data?.message;
-      dispatchMethod(SET_ERROR, errorMsg);
+      const payload = {
+        message:
+          error?.response?.data?.message ||
+          error?.response?.data?.status_message,
+        status: error?.response?.status,
+      };
+
+      dispatchMethod(SET_ERROR, payload);
     }
   }
 };

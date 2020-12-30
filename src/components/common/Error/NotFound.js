@@ -1,14 +1,16 @@
 import React from "react";
 import "./NotFound.scss";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { setError } from "../../../redux/actions/errorActions";
 
 const NotFound = () => {
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const navigateToHomePage = () => {
-    //   setError({ message: '', statusCode: null });
-    //   clearState();
+    dispatch(setError({ message: "", statusCode: null }));
+
     history.push("/");
   };
 
