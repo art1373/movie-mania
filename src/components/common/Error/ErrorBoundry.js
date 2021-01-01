@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Notfound from "./NotFound";
 import PropTypes from "prop-types";
+import * as Sentry from "@sentry/react";
 
 class ErrorBoundry extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class ErrorBoundry extends Component {
     this.state = { error: null, errorInfo: null };
   }
   componentDidCatch(error, info) {
+    console.log("error boundry", { error, info });
     this.setState({ error });
   }
 
@@ -16,10 +18,11 @@ class ErrorBoundry extends Component {
   };
 
   render() {
-    if (this.state.error) {
-      return <Notfound clearState={this.clearState} />;
-    }
-    return this.props.children;
+    return (
+      <Sentry.ErrorBoundary fallback={<Notfound />}>
+        {this.props.children}
+      </Sentry.ErrorBoundary>
+    );
   }
 }
 

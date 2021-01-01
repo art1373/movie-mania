@@ -44,7 +44,6 @@ function Details() {
       ) : (
         detail && (
           <div className="movie-container">
-            {console.log(detail)}
             <div
               className="movie-bg"
               style={{
