@@ -2,7 +2,7 @@ import Axios from "axios";
 
 const MAIN_URL = "https://api.themoviedb.org/3";
 export const IMAGE_URL = "https://image.tmdb.org/t/p/original";
-const API_KEY = process.env.API_SECRET;
+const API_KEY = process.env.REACT_APP_API_SECRET;
 
 export const requestMaker = async (type, page) => {
   try {
