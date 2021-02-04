@@ -35,6 +35,7 @@ export const numberFormatter = (number, digits) => {
 };
 
 export const formatMovieTitle = (title) => {
+  if (/\d/.test(title)) return null;
   let titleStr = title?.toLowerCase();
   return titleStr.replace(/ /g, "-");
 };
