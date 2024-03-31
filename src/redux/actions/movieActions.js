@@ -22,6 +22,7 @@ import {
 const dispatchMethod = (type, payload, dispatch) => {
   dispatch({ type, payload });
 };
+
 const mainMovieRequest = async (type, pageNumber) => {
   const movies = await requestMaker(type, pageNumber);
   const { results, page, total_pages } = movies.data;
